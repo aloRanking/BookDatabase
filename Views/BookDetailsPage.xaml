@@ -9,7 +9,7 @@
 
     <ScrollView>
         <VerticalStackLayout Margin="0,10,0,0">
-            <Frame>
+            <Border>
 
                 <VerticalStackLayout>
                     <controls:CustomImageControl Base64Source="{Binding BookModel.Image}" WidthRequest="100" HeightRequest="200"/>
@@ -31,14 +31,22 @@
 
                             <Frame>
                                 <VerticalStackLayout Spacing="20">
-                                    <Label Text="Book Description: "  HorizontalOptions="CenterAndExpand" FontAttributes="Bold" FontSize="18"/>
-                                    <Label Text="{Binding BookModel.Description}"  HorizontalOptions="CenterAndExpand"  FontSize="18"/>
+                                    <Label Text="Book Author: "  HorizontalOptions="Center" FontAttributes="Bold" FontSize="18"/>
+                                    <Label Text="{Binding BookModel.Author}"  HorizontalOptions="CenterAndExpand" FontSize="18"/>
                                 </VerticalStackLayout>
                             </Frame>
+
+                            <Frame>
+                                <VerticalStackLayout Spacing="20">
+                                    <Label Text="Book Description: "  HorizontalOptions="CenterAndExpand" FontAttributes="Bold" FontSize="18"/>
+                                    <Label Text="{Binding BookModel.Description}"  HorizontalOptions="CenterAndExpand"  FontSize="16"/>
+                                </VerticalStackLayout>
+                            </Frame>
+                        
                         </VerticalStackLayout>
                     </Frame>
                 </VerticalStackLayout>
-            </Frame>
+            </Border>
 
         </VerticalStackLayout>
     </ScrollView>

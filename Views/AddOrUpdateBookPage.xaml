@@ -34,6 +34,11 @@
             </inputLayout:SfTextInputLayout>
             <BoxView></BoxView>
 
+            <inputLayout:SfTextInputLayout Hint="Book Author">
+                <Entry Text="{Binding AddBookModel.Author}" />
+            </inputLayout:SfTextInputLayout>
+            <BoxView></BoxView>
+
             <inputLayout:SfTextInputLayout Hint="Book Description">
                 <Entry Text="{Binding AddBookModel.Description}" />
             </inputLayout:SfTextInputLayout>
