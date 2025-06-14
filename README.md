@@ -84,7 +84,12 @@ dotnet run
 
 <img src="assets/ss3.jpeg" alt="Add Book" width="300"/> 
 
+✅ Future Improvements
+- Polish the the UI
+- Implement proper swipe to update/delete
+
+
 🙌 Credits
-	•	Built with 💙 using .NET MAUI
-	•	SQLite powered by sqlite-net-pcl
-	•	Toasts and MVVM support via CommunityToolkit.Maui
+- Built with 💙 using .NET MAUI
+- SQLite powered by sqlite-net-pcl
+- Toasts and MVVM support via CommunityToolkit.Maui
