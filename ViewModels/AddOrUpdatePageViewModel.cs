@@ -29,8 +29,19 @@ namespace BookDatabase.ViewModels
         {
             this.bookService = bookService;
             Title = "Add Book Data";
+      
             AddBookModel = new Book();
+            
+            
         }
+
+        partial void OnAddBookModelChanged(Book value)
+{
+    if (value is not null && !string.IsNullOrWhiteSpace(value.Image))
+    {
+        GetImage(value.Image);
+    }
+}
 
         [RelayCommand]
         private async Task SelectImage()
