@@ -74,15 +74,13 @@ namespace BookDatabase.ViewModels
         [RelayCommand]
         private async Task UpdateBookData(Book bookToBeUpdated)
         {
-            bool answer = await Shell.Current.DisplayAlert("Confirm Update?", $"Are you sure you wanna update: {bookToBeUpdated.Title} ?", "Yes", "No");
-            if (answer)
-            {
+            
                 //get full description
                 var desc = await bookService.GetBookAsync(bookToBeUpdated.Id);
                 var navigationParameter = new Dictionary<string, object>();
                 navigationParameter.Add("UpdateBookData", desc);
                 await Shell.Current.GoToAsync(nameof(AddOrUpdateBookPage), navigationParameter);
-            }
+            
         }
 
         private static async void MakeToast(string message)
