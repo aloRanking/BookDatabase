@@ -11,67 +11,88 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Home"
-                Command="{Binding NavigateToHomeCommand}"></ToolbarItem>
+                     Command="{Binding NavigateToHomeCommand}"></ToolbarItem>
     </ContentPage.ToolbarItems>
 
-    <StackLayout>
-        <CollectionView IsVisible="{Binding ShowErrors}"
-                ItemsSource="{Binding Errors}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Error">
-                    <VerticalStackLayout>
-                        <HorizontalStackLayout>
-                            <Label Text="{Binding Property}"
-                                    FontAttributes="Bold"
-                                    TextColor="IndianRed"></Label>
-                            <Label Text="{Binding Value}"
-                                    TextColor="IndianRed"></Label>
-                        </HorizontalStackLayout>
-                    </VerticalStackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+    <ScrollView>
+        <StackLayout>
+            <CollectionView IsVisible="{Binding ShowErrors}"
+                            ItemsSource="{Binding Errors}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Error">
+                        <VerticalStackLayout>
+                            <HorizontalStackLayout>
+                                <Label Text="{Binding Property}"
+                                       FontAttributes="Bold"
+                                       TextColor="IndianRed"></Label>
+                                <Label Text="{Binding Value}"
+                                       TextColor="IndianRed"></Label>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
 
-        <VerticalStackLayout Margin="0,10,0,0">
-            <inputLayout:SfTextInputLayout Hint="Book Title">
-                <Entry Text="{Binding AddBookModel.Title}"/>
-            </inputLayout:SfTextInputLayout>
-            <BoxView></BoxView>
+            <VerticalStackLayout Margin="16,10,16,0">
 
-            <inputLayout:SfTextInputLayout Hint="Book Author">
-                <Entry Text="{Binding AddBookModel.Author}"/>
-            </inputLayout:SfTextInputLayout>
-            <BoxView></BoxView>
 
-            <inputLayout:SfTextInputLayout Hint="Book Description">
-                <Entry Text="{Binding AddBookModel.Description}"/>
-            </inputLayout:SfTextInputLayout>
-            <BoxView></BoxView>
-
-            <HorizontalStackLayout>
-                <inputLayout:SfTextInputLayout WidthRequest="200">
-                    <Button Text="Browse Image"
-                            Command="{Binding SelectImageCommand}"
-                            HeightRequest="50"></Button>
+                <inputLayout:SfTextInputLayout Hint="Book Title"
+                                               ContainerType="Outlined">
+                    <Entry Text="{Binding AddBookModel.Title}"/>
                 </inputLayout:SfTextInputLayout>
+                <BoxView></BoxView>
 
-                <inputLayout:SfTextInputLayout WidthRequest="200">
-                    <HorizontalStackLayout>
-                                                <Image Source="{Binding ImageSourceFile}"  WidthRequest="100" HeightRequest="150"/>
-                        
-                    </HorizontalStackLayout>
+                <inputLayout:SfTextInputLayout Hint="Book Author"
+                                               ContainerType="Outlined">
+                    <Entry Text="{Binding AddBookModel.Author}"/>
                 </inputLayout:SfTextInputLayout>
+                <BoxView></BoxView>
 
-            </HorizontalStackLayout>
-            <BoxView></BoxView>
-
-            <Button Text="Save Data"
-                    Margin="10"
-                    Command="{Binding SaveDataCommand}"></Button>
-        </VerticalStackLayout>
-    </StackLayout>
+                <inputLayout:SfTextInputLayout Hint="Book Description"
+                                               ContainerType="Outlined">
+                    <Entry Text="{Binding AddBookModel.Description}"/>
+                </inputLayout:SfTextInputLayout>
+                <BoxView></BoxView>
 
 
+
+               <HorizontalStackLayout BackgroundColor="white" Spacing="30">
+    <Border HorizontalOptions="Center"
+        StrokeShape="RoundRectangle 40,0,0,40">
+        <Border.GestureRecognizers>
+            <TapGestureRecognizer 
+                Command="{Binding SelectImageCommand}"
+                CommandParameter="{Binding .}" />
+        </Border.GestureRecognizers>
+
+        <Grid WidthRequest="200" HeightRequest="200" BackgroundColor="white">
+            <!-- Actual image -->
+            <Image Source="{Binding ImageSourceFile}"
+                   Aspect="Fill"
+                   IsVisible="{Binding HasImage}" />
+
+            <!-- Placeholder text -->
+            <Label Text="Select an image"
+                   TextColor="Gray"
+                   FontAttributes="Italic"
+                   FontSize="14"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   IsVisible="{Binding HasImage, Converter={StaticResource InverseBoolConverter}}" />
+        </Grid>
+    </Border>
+</HorizontalStackLayout>
+                
+                <BoxView></BoxView>
+
+                <Button Text="Save Data"
+                        Margin="10"
+                        Command="{Binding SaveDataCommand}"></Button>
+            </VerticalStackLayout>
+        </StackLayout>
+
+
+    </ScrollView>
 
 </ContentPage>

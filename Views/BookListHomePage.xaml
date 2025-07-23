@@ -11,11 +11,110 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Refresh"
                      Command="{Binding LoadBookFromDatabaseCommand}"></ToolbarItem>
-        <ToolbarItem Text="+ Add Book"
-                     Command="{Binding NavigateToAddBookPageCommand}"></ToolbarItem>
+        
     </ContentPage.ToolbarItems>
 
-    <StackLayout>
+    <AbsoluteLayout>
+
+       <Button
+    BackgroundColor="#FF3D3D99"
+    CornerRadius="100"
+    Command="{Binding NavigateToAddBookPageCommand}"
+    AbsoluteLayout.LayoutFlags="PositionProportional"
+    AbsoluteLayout.LayoutBounds=".95,.95,60,60">
+    
+    <Button.ImageSource>
+        <FontImageSource Glyph="{x:Static models:FaIcons.Plus}"
+                         FontFamily="FontAwesome"
+                         Size="24"
+                         Color="White" />
+    </Button.ImageSource>
+</Button>
+        <VerticalStackLayout>
+
+
+            <ActivityIndicator IsVisible="{Binding LoadBookFromDatabaseCommand.IsRunning}"
+                               Color="Red"
+                               IsRunning="{Binding LoadBookFromDatabaseCommand.IsRunning}"
+                               Margin="50,150,50,0"></ActivityIndicator>
+
+
+            <Grid RowDefinitions="*"
+                  IsVisible="{Binding GridVisibility}">
+                <CollectionView ItemsSource="{Binding Books}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+
+                        <DataTemplate x:DataType="models:Book">
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems>
+                                        <SwipeItem Text="Delete"
+                                                   BackgroundColor="Red"
+                                                   Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodel:BooklistHomePageViewmodel}}, Path=DeleteBookDataCommand}"
+                                                   CommandParameter="{Binding .}"/>
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+
+
+
+
+                                <SwipeView.LeftItems>
+                                    <SwipeItems>
+                                        <SwipeItem Text="Update"
+                                                   BackgroundColor="Blue"
+                                                   Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodel:BooklistHomePageViewmodel}}, Path=UpdateBookDataCommand}"
+                                                   CommandParameter="{Binding .}"/>
+                                    </SwipeItems>
+                                </SwipeView.LeftItems>
+
+
+                                <Frame Margin="16,10,16,0"
+                                       Padding="5,0,5,0">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer  Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodel:BooklistHomePageViewmodel}}, Path=NavigateToDetailsCommand}"
+                                                               CommandParameter="{Binding .}"></TapGestureRecognizer>
+
+                                    </Frame.GestureRecognizers>
+
+                                    <HorizontalStackLayout Spacing="20"
+                                                           Padding="0">
+                                        <controls:CustomImageControl Base64Source="{Binding Image}"
+                                                                     WidthRequest="50"
+                                                                     HeightRequest="100"/>
+                                        <VerticalStackLayout VerticalOptions="CenterAndExpand">
+                                            <Label Text="{Binding Title}"
+                                                   FontSize="14"
+                                                   FontAttributes="Bold"></Label>
+                                            <Label Text="{Binding Description}"></Label>
+                                        </VerticalStackLayout>
+                                    </HorizontalStackLayout>
+                                </Frame>
+                            </SwipeView>
+
+                        </DataTemplate>
+
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+
+
+
+        </VerticalStackLayout>
+
+
+
+
+    </AbsoluteLayout>
+
+    <!--  -->
+
+
+
+
+    <!-- <StackLayout>
         <ActivityIndicator IsVisible="{Binding LoadBookFromDatabaseCommand.IsRunning}"
                            Color="Red"
                            IsRunning="{Binding LoadBookFromDatabaseCommand.IsRunning}"
@@ -35,55 +134,55 @@
                                     <SwipeItem Text="Delete"
                                                BackgroundColor="Red"
                                                Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodel:BooklistHomePageViewmodel}}, Path=DeleteBookDataCommand}"
-                                                                CommandParameter="{Binding .}"/>
+                                               CommandParameter="{Binding .}"/>
                                 </SwipeItems>
                             </SwipeView.RightItems>
 
-                            
 
-                                
-                                    <SwipeView.LeftItems>
-                                        <SwipeItems>
-                                            <SwipeItem Text="Update"
-                                                       BackgroundColor="Blue"
-                                                       Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodel:BooklistHomePageViewmodel}}, Path=UpdateBookDataCommand}"
-                                                                CommandParameter="{Binding .}"/>
-                                        </SwipeItems>
-                                    </SwipeView.LeftItems>
-                                
 
-                                <Frame Margin="16,10,16,0"
-                                       Padding="5,0,5,0">
-                                    <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer  Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodel:BooklistHomePageViewmodel}}, Path=NavigateToDetailsCommand}"
-                                                               CommandParameter="{Binding .}"></TapGestureRecognizer>
-                                        
-                                    </Frame.GestureRecognizers>
 
-                                    <HorizontalStackLayout Spacing="20"
-                                                           Padding="0">
-                                        <controls:CustomImageControl Base64Source="{Binding Image}"
-                                                                     WidthRequest="50"
-                                                                     HeightRequest="100"
-                                                                    />
-                                        <VerticalStackLayout VerticalOptions="CenterAndExpand">
-                                            <Label Text="{Binding Title}"
-                                                FontSize="14"
-                                                FontAttributes="Bold"
-                                        
-                                            ></Label>
-                                            <Label Text="{Binding Description}"></Label>
-                                        </VerticalStackLayout>
-                                    </HorizontalStackLayout>
-                                </Frame>
-                            </SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Update"
+                                               BackgroundColor="Blue"
+                                               Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodel:BooklistHomePageViewmodel}}, Path=UpdateBookDataCommand}"
+                                               CommandParameter="{Binding .}"/>
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+
+
+                            <Frame Margin="16,10,16,0"
+                                   Padding="5,0,5,0">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer  Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodel:BooklistHomePageViewmodel}}, Path=NavigateToDetailsCommand}"
+                                                           CommandParameter="{Binding .}"></TapGestureRecognizer>
+
+                                </Frame.GestureRecognizers>
+
+                                <HorizontalStackLayout Spacing="20"
+                                                       Padding="0">
+                                    <controls:CustomImageControl Base64Source="{Binding Image}"
+                                                                 WidthRequest="50"
+                                                                 HeightRequest="100"/>
+                                    <VerticalStackLayout VerticalOptions="CenterAndExpand">
+                                        <Label Text="{Binding Title}"
+                                               FontSize="14"
+                                               FontAttributes="Bold"></Label>
+                                        <Label Text="{Binding Description}"></Label>
+                                    </VerticalStackLayout>
+                                </HorizontalStackLayout>
+                            </Frame>
+                        </SwipeView>
 
                     </DataTemplate>
 
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </Grid>
-    </StackLayout>
+       
+    </StackLayout> -->
+
+
 
 
 </ContentPage>

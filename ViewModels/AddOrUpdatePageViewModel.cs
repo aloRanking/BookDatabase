@@ -24,6 +24,8 @@ namespace BookDatabase.ViewModels
         [ObservableProperty]
         ImageSource _imageSourceFile;
 
+        public bool HasImage => ImageSourceFile != null;
+
         private readonly IBookService bookService;
         public AddOrUpdateBookPageViewmodel(IBookService bookService)
         {
@@ -36,11 +38,15 @@ namespace BookDatabase.ViewModels
         }
 
         partial void OnAddBookModelChanged(Book value)
+        {
+            if (value is not null && !string.IsNullOrWhiteSpace(value.Image))
+            {
+                GetImage(value.Image);
+            }
+        }
+partial void OnImageSourceFileChanged(ImageSource value)
 {
-    if (value is not null && !string.IsNullOrWhiteSpace(value.Image))
-    {
-        GetImage(value.Image);
-    }
+    OnPropertyChanged(nameof(HasImage));
 }
 
         [RelayCommand]
