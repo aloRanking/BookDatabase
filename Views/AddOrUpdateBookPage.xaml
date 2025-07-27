@@ -9,10 +9,10 @@
              xmlns:models="clr-namespace:BookDatabase.Models"
              Title="{Binding Title}">
 
-    <ContentPage.ToolbarItems>
+    <!-- <ContentPage.ToolbarItems>
         <ToolbarItem Text="Home"
                      Command="{Binding NavigateToHomeCommand}"></ToolbarItem>
-    </ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems> -->
 
     <ScrollView>
         <StackLayout>
