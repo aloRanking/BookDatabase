@@ -13,11 +13,46 @@ namespace BookDatabase.ViewModels
     {
         [ObservableProperty]
         private Book _bookModel;
+
+        private int _bookId;
+         private bool _isFirstLoad = true;
         private readonly IBookService bookService;
         public BookDetailsPageViewmodel(IBookService bookService)
         {
             this.bookService = bookService;
 
+        }
+
+        partial void OnBookModelChanged(Book value)
+        {
+            if (value is not null)
+                _bookId = value.Id;
+        }
+
+        [RelayCommand]
+
+
+        public async Task ReloadBook()
+        {
+            if (_isFirstLoad)
+            {
+                _isFirstLoad = false;
+                return;
+            }
+
+            if (_bookId > 0)
+            {
+                BookModel = await bookService.GetBookAsync(_bookId);
+            }
+        }
+
+
+
+
+        [RelayCommand]
+        private async Task LoadBookFromDatabase(Book bookToBeUpdated)
+        {
+            BookModel = await bookService.GetBookAsync(bookToBeUpdated.Id);
         }
 
 

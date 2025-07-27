@@ -10,4 +10,14 @@ public partial class BookDetailsPage : ContentPage
 		InitializeComponent();
 		BindingContext = bookDetailsPageViewmodel;
 	}
+
+	protected override void OnAppearing()
+{
+    base.OnAppearing();
+
+    if (BindingContext is BookDetailsPageViewmodel vm)
+    {
+        vm.ReloadBookCommand.Execute(null);
+    }
+}
 }

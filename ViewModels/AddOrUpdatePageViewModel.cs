@@ -24,6 +24,11 @@ namespace BookDatabase.ViewModels
         [ObservableProperty]
         ImageSource _imageSourceFile;
 
+        [ObservableProperty]
+        private string _submitButtonText = "Save Data"; 
+[ObservableProperty]
+private bool _isEditMode;
+
         public bool HasImage => ImageSourceFile != null;
 
         private readonly IBookService bookService;
@@ -42,6 +47,8 @@ namespace BookDatabase.ViewModels
             if (value is not null && !string.IsNullOrWhiteSpace(value.Image))
             {
                 GetImage(value.Image);
+                IsEditMode = value.Id > 0;
+                SubmitButtonText = value.Id > 0 ? "Update" : "Save Data";
             }
         }
 partial void OnImageSourceFileChanged(ImageSource value)
@@ -101,8 +108,11 @@ partial void OnImageSourceFileChanged(ImageSource value)
             if (result.Flag)
             {
                 MakeToast(result.Message);
-                AddBookModel = new Book();
-                ImageSourceFile = null;
+                if (!IsEditMode)
+                {
+                    AddBookModel = new Book();
+                    ImageSourceFile = null;
+                }
                 return;
             }
             Errors.Clear();

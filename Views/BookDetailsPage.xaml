@@ -20,13 +20,13 @@
 
                 <VerticalStackLayout>
                     <BoxView HeightRequest="20"
-                            Color="Transparent"/>
+                            Color="White"/>
                     <controls:CustomImageControl Base64Source="{Binding BookModel.Image}"
                             WidthRequest="250"
                             HeightRequest="350"/>
 
                     <BoxView HeightRequest="20"
-                            Color="Transparent"/>
+                            Color="White"/>
 
 
                     <VerticalStackLayout Spacing="10" Margin="16,0,16,0"
@@ -45,7 +45,7 @@
 
 
                         <BoxView HeightRequest="20"
-                                Color="Transparent"/>
+                                Color="White"/>
 
                         <VerticalStackLayout Spacing="10"
                                >
@@ -60,7 +60,7 @@
 
                         </VerticalStackLayout>
                          <BoxView HeightRequest="20"
-                                Color="Transparent"/>
+                                Color="White"/>
                     </VerticalStackLayout>
 
                        </VerticalStackLayout>

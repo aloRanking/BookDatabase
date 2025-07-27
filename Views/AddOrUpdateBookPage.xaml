@@ -9,10 +9,7 @@
              xmlns:models="clr-namespace:BookDatabase.Models"
              Title="{Binding Title}">
 
-    <!-- <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Home"
-                     Command="{Binding NavigateToHomeCommand}"></ToolbarItem>
-    </ContentPage.ToolbarItems> -->
+    
 
     <ScrollView>
         <StackLayout>
@@ -86,7 +83,7 @@
                 
                 <BoxView></BoxView>
 
-                <Button Text="Save Data"
+                <Button Text="{Binding SubmitButtonText}"
                         Margin="10"
                         Command="{Binding SaveDataCommand}"></Button>
             </VerticalStackLayout>
